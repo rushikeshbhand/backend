@@ -7,6 +7,7 @@ const serverless = require('serverless-http');
 
 dotenv.config();
 const app = express();
+const port = process.env.PORT || 3000;
 
 // Enable CORS for all origins
 app.use(cors({ origin: '*' }));
@@ -53,5 +54,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Export the serverless handler
-module.exports = serverless(app);
+app.use(port , (req, res) =>{
+  console.log(`Server is running on port ${port}`);
+})
