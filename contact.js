@@ -15,7 +15,7 @@ app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 
 // Contact form route
-app.post('/contact', async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, contact, email, service, message } = req.body;
 
   // Configure the email transporter
