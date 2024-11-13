@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 app.post('/api/contact', async (req, res) => {
   const { name, contact, email, service, message } = req.body;
 
-  // Configure the email transporter
+  console.log('Preparing to send email...');  // Log to check progress
+
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -27,9 +28,8 @@ app.post('/api/contact', async (req, res) => {
     },
   });
 
-  // Set up email data
   let mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER}>`,
+    from: `"${name}" <${email}>`,
     to: 'rushikeshgbhand@gmail.com',
     subject: 'New Contact Us Form Submission',
     text: `Name: ${name}\nContact Number: ${contact}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
@@ -37,12 +37,14 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
     res.status(200).json({ success: true, message: 'Email sent successfully!' });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error(error);
     res.status(500).json({ success: false, message: 'Failed to send email' });
   }
 });
+
 
 // Default route
 app.get('/', (req, res) => {

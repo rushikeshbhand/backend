@@ -1,13 +1,17 @@
 {
- "version": 2,
-    "builds": [
-      {
-        "src": "contact.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      { "src": "/api/contact", "dest": "contact.js" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "contact.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "functions": {
+    "api/contact.js": {
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    { "src": "/api/contact", "dest": "/contact.js" }
+  ]
+}
