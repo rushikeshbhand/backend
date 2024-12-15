@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
+console.log("Welcome to")
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.post("/create-user", (req, res) => {
   console.log("Body:", req.body);
 
   const { name, email, password } = req.body;
+  console.log("Welcome to")
 
   if (!name || !email || !password) {
     return res.status(400).json({
